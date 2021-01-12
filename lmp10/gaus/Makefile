@@ -8,4 +8,4 @@ piv_ge_solver.o: piv_ge_solver.c piv_ge_solver.h matrix.h
 .PHONY: clean
 
 clean:
-	-rm *.o libge.a
+	-rm -f *.o libge.a

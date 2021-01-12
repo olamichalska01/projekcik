@@ -3,55 +3,62 @@
 #include <stdio.h>
 #include <string.h>
 
-matrix_t *
-make_matrix (int rn, int cn)
+matrix_t * make_matrix (int rn, int cn)
 {
-  matrix_t *new_mat = malloc (sizeof *new_mat);
-  if (new_mat == NULL)
-    return NULL;
-  if ((new_mat->e =
-       malloc ((size_t) rn * (size_t) cn * sizeof *new_mat->e)) == NULL) {
-    free (new_mat);
-    return NULL;
-  }
-  new_mat->rn = rn;
-  new_mat->cn = cn;
-  memset (new_mat->e, 0, (size_t) (rn * (size_t) cn * sizeof *new_mat->e));
-  return new_mat;
+	matrix_t *new_mat = malloc (sizeof *new_mat);
+
+  	if (new_mat == NULL)
+    		return NULL;
+  	
+	if ((new_mat->e = malloc ((size_t) rn * (size_t) cn * sizeof *new_mat->e)) == NULL) 
+	{
+    		free (new_mat);
+    		return NULL;
+  	}
+  	
+	new_mat->rn = rn;
+	new_mat->cn = cn;
+  	
+	memset (new_mat->e, 0, (size_t) (rn * (size_t) cn * sizeof *new_mat->e));
+
+  	return new_mat;
 }
 
-void
-free_matrix (matrix_t * m)
+void free_matrix (matrix_t * m)
 {
-  free (m->e);
-  free (m);
+  	free (m->e);
+  	free (m);
 }
 
-void
-put_entry_matrix (matrix_t * m, int i, int j, double val)
+void put_entry_matrix (matrix_t * m, int i, int j, double val)
 {
-  if (i >= 0 && i < m->rn && j >= 0 && j <= m->cn)
-    m->e[i * m->cn + j] = val;
+  	if (i >= 0 && i < m->rn && j >= 0 && j <= m->cn)
+    		m->e[i * m->cn + j] = val;
 }
 
-void
-add_to_entry_matrix (matrix_t * m, int i, int j, double val)
+void add_to_entry_matrix (matrix_t * m, int i, int j, double val)
 {
   if (i >= 0 && i < m->rn && j >= 0 && j <= m->cn)
     m->e[i * m->cn + j] += val;
 }
 
-double
-get_entry_matrix (matrix_t * m, int i, int j )
+void add_sm_ctm_matrix (matrix_t * m, int i, int j, double val)
 {
   if (i >= 0 && i < m->rn && j >= 0 && j <= m->cn)
-    return m->e[i * m->cn + j];
-	else
-		return -999;
+    m->e[i * m->cn + j] -= val;
 }
 
-matrix_t *
-read_matrix (FILE * in)
+
+double get_entry_matrix (matrix_t * m, int i, int j )
+{
+  if (i >= 0 && i < m->rn && j >= 0 && j <= m->cn)
+    	return m->e[i * m->cn + j];
+
+  else
+	return -999;
+}
+
+matrix_t * read_matrix (FILE * in)
 {
   int rn, cn;
   int i, j;
@@ -71,8 +78,7 @@ read_matrix (FILE * in)
   return new_mat;
 }
 
-void
-write_matrix (matrix_t * m, FILE * out)
+void write_matrix (matrix_t * m, FILE * out)
 {
   int i, j;
   if (m == NULL) {
@@ -88,8 +94,7 @@ write_matrix (matrix_t * m, FILE * out)
   }
 }
 
-matrix_t *
-copy_matrix (matrix_t * s)
+matrix_t * copy_matrix (matrix_t * s)
 {
   matrix_t *d = NULL;
   if (s != NULL)
@@ -105,8 +110,7 @@ copy_matrix (matrix_t * s)
   return d;
 }
 
-matrix_t *
-transpose_matrix (matrix_t * s)
+matrix_t * transpose_matrix (matrix_t * s)
 {
   matrix_t *d = NULL;
   if (s != NULL)
@@ -121,8 +125,7 @@ transpose_matrix (matrix_t * s)
   return d;
 }
 
-void
-xchg_rows (matrix_t * m, int i, int j)
+void xchg_rows (matrix_t * m, int i, int j)
 {
   if (m != NULL && i >= 0 && i < m->rn && j >= 0 && j < m->rn) {
     int k;
@@ -135,8 +138,7 @@ xchg_rows (matrix_t * m, int i, int j)
   }
 }
 
-void
-xchg_cols (matrix_t * m, int i, int j)
+void xchg_cols (matrix_t * m, int i, int j) 
 {
   if (m != NULL && i >= 0 && i < m->cn && j >= 0 && j < m->cn) {
     int k;
@@ -149,8 +151,7 @@ xchg_cols (matrix_t * m, int i, int j)
   }
 }
 
-matrix_t *
-mull_matrix (matrix_t * a, matrix_t * b)
+matrix_t * mull_matrix (matrix_t * a, matrix_t * b)
 {
   if (a == NULL || b == NULL || a->cn != b->rn)
     return NULL;
@@ -171,8 +172,7 @@ mull_matrix (matrix_t * a, matrix_t * b)
   }
 }
 
-matrix_t *
-ge_matrix (matrix_t * a)
+matrix_t * ge_matrix (matrix_t * a)
 {
   matrix_t *c = copy_matrix (a);
   if (c != NULL) {
@@ -192,8 +192,7 @@ ge_matrix (matrix_t * a)
   return c;
 }
 
-int
-bs_matrix (matrix_t * a)
+int bs_matrix (matrix_t * a)
 {
   if (a != NULL) {
     int r, c, k;
