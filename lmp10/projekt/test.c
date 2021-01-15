@@ -10,12 +10,17 @@ double cze_n(int st, double x)
 
 double d_czen_jeden(int st, double x)
 {
-        return 0.5 * st * ( pow( x + pow(x * x - 1, 0.5) , st - 1 ) * ( 1 + x * pow(x * x - 1, -0.5) ) + pow( x - pow(x * x - 1, 0.5) , st - 1 ) * ( 1 - x * pow(x * x - 1, -0.5) ) );
-
+	if(st == 0) return 0;	
+	else if(st == 1) return 1;
+	else return 0.5 * st * ( pow( x + pow(x * x - 1, 0.5) , st - 1 ) * ( 1 + x * pow(x * x - 1, -0.5) ) + pow( x - pow(x * x - 1, 0.5) , st - 1 ) * ( 1 - x * pow(x * x - 1, -0.5) ) );
 }
 
 double d_czen_dwa(int st, double x) // jak ktos idzie do piekla to tam liczenie kolejnych pochodnych jest jedna z tortur
 {
+
+	if(st == 0 || st == 1) return 0;
+       	
+
         const double t = pow( x * x - 1, -0.5) * x;
         const double b = sqrt(x * x - 1);
 
@@ -29,23 +34,30 @@ double d_czen_dwa(int st, double x) // jak ktos idzie do piekla to tam liczenie 
 double d_czen_trzy(int st, double x)
 {
         const double a = sqrt(x*x - 1);
-
-        const double licznik = pow( x - a, st) * ( 3 * st * x * a + (st*st + 2) * x * x - st * st + 1 ) + pow( x + a, st) * ( 3 * st * x * a + (-1 * st * st - 2)* x * x + st*st - 1 );
-
+	const double licznik = pow( x - a, st) * ( 3 * st * x * a + (st*st + 2) * x * x - st * st + 1 ) + pow( x + a, st) * ( 3 * st * x * a + (-1 * st * st - 2)* x * x + st*st - 1 );
         const double mianownik = 2 * pow( x*x - 1, 2.5);
 
-
-        return -st * licznik / mianownik;
+	if(st == 0 || st == 1) return 0;
+	else return -st * licznik / mianownik;
 }
 
 
 int main()
 {
 
-	int s = 3;
+	int s;
 	double x = 5.4;
 
-	printf("pierwsza:  %lf \ndruga:  %lf\ntrzecia:  %lf\n", d_czen_jeden(s,x), d_czen_dwa(s,x), d_czen_trzy(s,x) ); 
+
+	s = 0;
+        printf("\ndla stopnia 0:\n\npierwsza:    %lf \ndruga:       %lf\ntrzecia:     %lf\nczebyszew:   %lf\n", d_czen_jeden(s,x), d_czen_dwa(s,x), d_czen_trzy(s,x), cze_n(s,x) );
+	
+	s = 1;
+	printf("\ndla stopnia 1:\n\npierwsza:    %lf \ndruga:       %lf\ntrzecia:     %lf\nczebyszew:   %lf\n", d_czen_jeden(s,x), d_czen_dwa(s,x), d_czen_trzy(s,x), cze_n(s,x) ); 
+
+	s = 8;
+	printf("\ndla innego stopnia:\n\npierwsza:    %lf \ndruga:       %lf\ntrzecia:     %lf\nczebyszew:   %lf\n\n\n", d_czen_jeden(s,x), d_czen_dwa(s,x), d_czen_trzy(s,x), cze_n(s,x) );
+
 
 	return 0;
 }
