@@ -42,12 +42,6 @@ void add_to_entry_matrix (matrix_t * m, int i, int j, double val)
     m->e[i * m->cn + j] += val;
 }
 
-void add_sm_ctm_matrix (matrix_t * m, int i, int j, double val)
-{
-  if (i >= 0 && i < m->rn && j >= 0 && j <= m->cn)
-    m->e[i * m->cn + j] -= val;
-}
-
 
 double get_entry_matrix (matrix_t * m, int i, int j )
 {
