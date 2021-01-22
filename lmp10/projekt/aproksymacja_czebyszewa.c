@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <math.h>
-#include <matrix.h>
-
+#include "makespl.h"
+#include "piv_ge_solver.h"
+#include <stdlib.h>
+#include <float.h>
 
 double cze_n(int st, double x)
 {
