@@ -5,13 +5,13 @@
 
 double fun( double x ) {
 				double r= ((double)rand() - RAND_MAX/2.0)/RAND_MAX/5; // +-10%
-				return (1+r)*(10*x*x*x*x+5*x*x*x+x*x);
+				return (1+r)*sin(x);
 }
 
 int main( int argc, char **argv ) {
 				int n= argc > 1 ? atoi( argv[1] ) : 100;
-				double a= argc > 2 ? atof( argv[2] ) : -3;
-				double b= argc > 3 ? atof( argv[3] ) : 2;
+				double a= argc > 2 && atof(argv[2]) > 0 && atof(argv[2]) < 4 ? atof( argv[2] ) : 0;
+				double b= argc > 3 && atof(argv[3]) < 5 && atof(argv[3]) > a ? atof( argv[3] ) : a + 3;
 				FILE *out= argc > 4 ? fopen( argv[4], "w" ) : stdout;
 
 				srand( argc > 5 ? atoi(argv[5]) : time(NULL) );
