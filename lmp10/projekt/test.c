@@ -41,6 +41,18 @@ double d_czen_trzy(int st, double x)
 	else return -st * licznik / mianownik;
 }
 
+double d_czen_cztery(int k, double x)
+{
+        const double a = sqrt(x*x - 1);
+        const double b = 6 * pow( k, 2 );
+        const double c = x * x - 1;
+	
+	if(k == 0) return 0;
+
+        return -(k * (pow((a+x), k) * (3*k*pow(c, 3/2)+(b+6)*x*x*x+a*((-k*k*k-14*k)*x*x+k*k*k-k)+(9-b)*x)+pow((x-a),k)*(3*k*pow(c, 3/2)+(-b-6)*x*x*x+a*((-k*k*k-14*k)*x*x+k*k*k-k)+(b-9)*x))) / (2*pow(c, 7/2));
+
+}
+
 
 int main()
 {
@@ -50,13 +62,13 @@ int main()
 
 
 	s = 0;
-        printf("\ndla stopnia 0:\n\npierwsza:    %lf \ndruga:       %lf\ntrzecia:     %lf\nczebyszew:   %lf\n", d_czen_jeden(s,x), d_czen_dwa(s,x), d_czen_trzy(s,x), cze_n(s,x) );
+        printf("\ndla stopnia 0:\n\npierwsza:    %lf \ndruga:       %lf\ntrzecia:     %lf\nczwarta:     %lf\nczebyszew:   %lf\n", d_czen_jeden(s,x), d_czen_dwa(s,x), d_czen_trzy(s,x), d_czen_cztery(s,x), cze_n(s,x) );
 	
 	s = 1;
-	printf("\ndla stopnia 1:\n\npierwsza:    %lf \ndruga:       %lf\ntrzecia:     %lf\nczebyszew:   %lf\n", d_czen_jeden(s,x), d_czen_dwa(s,x), d_czen_trzy(s,x), cze_n(s,x) ); 
+	printf("\ndla stopnia 1:\n\npierwsza:    %lf \ndruga:       %lf\ntrzecia:     %lf\nczwarta:       %lf\nczebyszew:   %lf\n", d_czen_jeden(s,x), d_czen_dwa(s,x), d_czen_trzy(s,x), d_czen_cztery(s,x), cze_n(s,x) ); 
 
 	s = 3;
-	printf("\ndla innego stopnia:\n\npierwsza:    %lf \ndruga:       %lf\ntrzecia:     %lf\nczebyszew:   %lf\n\n\n", d_czen_jeden(s,x), d_czen_dwa(s,x), d_czen_trzy(s,x), cze_n(s,x) );
+	printf("\ndla innego stopnia:\n\npierwsza:    %lf \ndruga:       %lf\ntrzecia:     %lf\nczwarta:      %lf\nczebyszew:   %lf\n\n\n", d_czen_jeden(s,x), d_czen_dwa(s,x), d_czen_trzy(s,x), d_czen_cztery(s,x), cze_n(s,x) );
 
 
 	return 0;
