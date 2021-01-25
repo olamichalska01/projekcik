@@ -55,7 +55,7 @@ int main()
 	s = 1;
 	printf("\ndla stopnia 1:\n\npierwsza:    %lf \ndruga:       %lf\ntrzecia:     %lf\nczebyszew:   %lf\n", d_czen_jeden(s,x), d_czen_dwa(s,x), d_czen_trzy(s,x), cze_n(s,x) ); 
 
-	s = 8;
+	s = 3;
 	printf("\ndla innego stopnia:\n\npierwsza:    %lf \ndruga:       %lf\ntrzecia:     %lf\nczebyszew:   %lf\n\n\n", d_czen_jeden(s,x), d_czen_dwa(s,x), d_czen_trzy(s,x), cze_n(s,x) );
 
 
