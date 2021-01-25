@@ -7,9 +7,9 @@
 
 double cze_n(int st, double x)
 {
-        if(st == 0) return 1;
-        else if( st == 1) return x;
-        else  return 2 * x * cze_n(st-1, x) - cze_n(st-2, x);
+       // if(st == 0) return 1;
+        //else if( st == 1) return x;
+        return 2 * x * cze_n(st-1, x) - cze_n(st-2, x);
 }
 
 double d_czen_jeden(int st, double x)
@@ -36,8 +36,8 @@ double d_czen_trzy(int st, double x)
         const double licznik = pow( x - a, st) * ( 3 * st * x * a + (st*st + 2) * x * x - st * st + 1 ) + pow( x + a, st) * ( 3 * st * x * a + (-1 * st * st - 2)* x * x + st*st - 1 );
         const double mianownik = 2 * pow( x*x - 1, 2.5);
 
-        if(st == 0 || st == 1) return 0;
-        else return -st * licznik / mianownik;
+       // if(st == 0 || st == 1) return 0;
+        return -st * licznik / mianownik;
 }
 
 double d_czen_cztery(int k, double x)
@@ -46,7 +46,7 @@ double d_czen_cztery(int k, double x)
         const double b = 6 * pow( k, 2 );
         const double c = x * x - 1;
 
-        if(k == 0) return 0;
+        //if(k == 0) return 0;
 
         return -(k * (pow((a+x), k) * (3*k*pow(c, 3/2)+(b+6)*x*x*x+a*((-k*k*k-14*k)*x*x+k*k*k-k)+(9-b)*x)+pow((x-a),k)*(3*k*pow(c, 3/2)+(-b-6)*x*x*x+a*((-k*k*k-14*k)*x*x+k*k*k-k)+(b-9)*x))) / (2*pow(c, 7/2));
 
@@ -98,6 +98,7 @@ void make_spl(points_t * pts, spline_t * spl)
                         spl->f1[i] = 0;
                         spl->f2[i] = 0;
                         spl->f3[i] = 0;
+			spl->f4[i] = 0;
                         for (k = 0; k < nb; k++) 
 			{
                                 double          ck = get_entry_matrix(eqs, k, nb);
@@ -105,7 +106,8 @@ void make_spl(points_t * pts, spline_t * spl)
                                 spl->f1[i] += ck * d_czen_jeden(k, xx);
                                 spl->f2[i] += ck * d_czen_dwa(k, xx);
                                 spl->f3[i] += ck * d_czen_trzy(k, xx);
-                        }
+                  	        spl->f4[i] += ck * d_czen_cztery(k, xx);
+			}
                 }
         }
  }
